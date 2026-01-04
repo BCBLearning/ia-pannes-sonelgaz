@@ -1,7 +1,13 @@
+import sys
+import os
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+if ROOT_DIR not in sys.path:
+    sys.path.append(ROOT_DIR)
+
 import streamlit as st
 import pandas as pd
 import yaml
-import os
 import joblib
 
 from scripts.generate_data import generate_data
