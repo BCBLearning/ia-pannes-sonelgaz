@@ -1,0 +1,14 @@
+mode: simulation   # simulation | realtime
+
+scada:
+  protocol: OPC-UA
+  endpoint: opc.tcp://127.0.0.1:4840
+  refresh_seconds: 5
+
+thresholds:
+  tension_min: 200
+  tension_max: 240
+  courant_max: 20
+
+security:
+  read_only: true

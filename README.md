@@ -1,25 +1,13 @@
-# IA de détection des pannes électriques – Sonelgaz
+# Détection intelligente des pannes – Sonelgaz
 
-## Objectif
-Simulation IA pour :
-- détecter anomalies électriques
-- classifier types de pannes
-- visualiser réseau
+## Description
+Plateforme IA de supervision du réseau électrique :
+- Détection automatique d’anomalies
+- Identification des pannes
+- Dashboard décisionnel
+- Compatible SCADA Sonelgaz
 
-## Structure
-- `data/` : données simulées
-- `models/` : modèles IA (générés automatiquement)
-- `scripts/` : génération + entraînement
-- `app.py` : dashboard Streamlit
-
-## Déploiement Streamlit
-1. Pousser le projet sur GitHub
-2. Créer une app sur [Streamlit Cloud](https://streamlit.io/cloud)
-3. Fichier principal : `app.py`
-4. Branche : `main`
-5. Déploiement automatique : les modèles seront générés dans le cloud
-
-## Passage au réel
-- Remplacer `generate_data()` par lecture flux SCADA/IoT
-- Réentraîner modèles si besoin
-- Dashboard reste identique
+## Lancement local
+```bash
+pip install -r requirements.txt
+streamlit run app.py
