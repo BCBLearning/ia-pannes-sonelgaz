@@ -8,16 +8,18 @@ Simulation IA pour :
 
 ## Structure
 - `data/` : données simulées
-- `models/` : modèles IA
+- `models/` : modèles IA (générés automatiquement)
 - `scripts/` : génération + entraînement
 - `app.py` : dashboard Streamlit
 
 ## Déploiement Streamlit
-1. Générer données : `python scripts/generate_data.py`
-2. Entraîner modèles : `python scripts/train_models.py`
-3. Lancer dashboard : `streamlit run app.py`
+1. Pousser le projet sur GitHub
+2. Créer une app sur [Streamlit Cloud](https://streamlit.io/cloud)
+3. Fichier principal : `app.py`
+4. Branche : `main`
+5. Déploiement automatique : les modèles seront générés dans le cloud
 
 ## Passage au réel
-- Remplacer `generate_data` par flux SCADA
+- Remplacer `generate_data()` par lecture flux SCADA/IoT
 - Réentraîner modèles si besoin
 - Dashboard reste identique
