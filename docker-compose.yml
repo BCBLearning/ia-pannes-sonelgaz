@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  sonelgaz-ia:
+    build: .
+    container_name: sonelgaz-ia-panne-detection
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data:rw
+      - ./models:/app/models:rw
+      - ./logs:/app/logs:rw
+      - ./.streamlit/secrets.toml:/app/.streamlit/secrets.toml:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - TZ=Africa/Algiers
+    restart: unless-stopped
+    networks:
+      - sonelgaz-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Base de données optionnelle pour stockage des données
+  postgres:
+    image: postgres:13-alpine
+    container_name: sonelgaz-db
+    environment:
+      POSTGRES_DB: sonelgaz_ia
+      POSTGRES_USER: sonelgaz_user
+      POSTGRES_PASSWORD: changeme_in_production
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - sonelgaz-network
+    restart: unless-stopped
+
+  # OPC-UA Simulator pour développement
+  opcua-simulator:
+    image: openscada/opcua-sim-server:latest
+    container_name: sonelgaz-opcua-sim
+    ports:
+      - "4840:4840"
+    environment:
+      - OPCUA_ENDPOINT=opc.tcp://0.0.0.0:4840
+    networks:
+      - sonelgaz-network
+    restart: unless-stopped
+
+networks:
+  sonelgaz-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  data_volume:
+  models_volume:
+  logs_volume:
