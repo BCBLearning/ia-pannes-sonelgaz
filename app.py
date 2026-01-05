@@ -62,6 +62,9 @@ import time
 # ============================================
 # Imports projet
 # ============================================
+# ============================================
+# Imports projet
+# ============================================
 try:
     from scripts.generate_data import generate_data
     from scripts.train_models import train_models
@@ -73,7 +76,7 @@ try:
     from services.prediction_service import PredictionService
     from services.visualization_service import VisualizationService
     
-    from security.auth import authenticate, require_role
+    from security.auth import authenticate  # ⬅️ CORRIGÉ : sans require_role
     from security.audit_log import log_event
     
     from utils.helpers import calculate_statistics, format_timestamp, export_to_csv
